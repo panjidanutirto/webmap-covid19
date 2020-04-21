@@ -9,7 +9,7 @@ body {
 
 .my-custom-scrollbar {
 position: relative;
-height: 54vh;
+height: 52vh;
 overflow: auto;
 }
 
