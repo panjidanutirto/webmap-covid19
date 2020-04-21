@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Panji Danutirto">
+
+    <title class="title">Covid-19 Dashboard</title>
+
+    <link rel="icon" sizes="196x196" href="assets/img/logo.png">
+    <link rel="icon" type="image" href="assets/img/logo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet'/>
+    <link rel="stylesheet" type="text/css" href="assets/css/L.Control.ZoomBar.css"/>
+    <link rel="stylesheet" href="assets/css/app.css">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Dashboard Covid-19</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            <li><a id="about-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-question-circle fa-white"></i> Tentang</a></li>
+            </ul>
+          </div><!--/.navbar-collapse -->
+        </div>
+      </div>
+
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
+
+    <div class="row" style="height: 100%;">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><span name="location">Data Kasus Covid-19 di Indonesia Berdasarkan Provinsi</span></h3>
+          </div>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped" id="list-covid">
+              <thead>
+                  <tr class="info">
+                      <th>Provinsi</th>
+                      <th class="text-center">Positif</th>
+                      <th class="text-center">Sembuh</th>
+                      <th class="text-center">Meninggal</th>
+                  </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+         </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="introModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Jumlah Kasus Covid-19 di Indonesia Saat Ini</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="alert alert-info">
+                  <div class="text-white">
+                      <p class="text-white mb-0">TOTAL POSITIF</p>
+                      <img src="assets/img/sad.png" class="pull-right" width="50" height="50">
+                      <h2 class="mb-0 number-font" id="kasus"></h2>
+                      <p class="text-white mb-0">Orang</p>
+                  </div> 
+                </div>
+                <div class="alert alert-warning">
+                  <div class="text-white">
+                      <p class="text-white mb-0">TOTAL DALAM PERAWATAN</p>
+                      <img src="assets/img/sick.png" class="pull-right" width="50" height="50">
+                      <h2 class="mb-0 number-font" id="perawatan"></h2>
+                      <p class="text-white mb-0">Orang</p>
+                  </div> 
+                </div>
+                <div class="alert alert-success">
+                  <div class="text-white">
+                      <p class="text-white mb-0">TOTAL SEMBUH</p>
+                      <img src="assets/img/happy.png" class="pull-right" width="50" height="50">
+                      <h2 class="mb-0 number-font" id="sembuh"></h2>
+                      <p class="text-white mb-0">Orang</p>
+                  </div>
+                </div>
+                <div class="alert alert-danger">
+                  <div class="text-white">
+                      <p class="text-white mb-0">TOTAL MENINGGAL</p>
+                      <img src="assets/img/emoji.png" class="pull-right" width="50" height="50">
+                      <h2 class="mb-0 number-font" id="meninggal"></h2>
+                      <p class="text-white mb-0">Orang</p>
+                  </div>
+                </div>
+                <div class="col alert alert-info">
+                     <p class="col text-center">Sumber : Kawal Covid-19.<br>Update : <span id="date"></span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Tentang</h4>
+          </div>
+          <div class="modal-body">
+            <p>Aplikasi GIS berbasis web standar yang dapat dikembangkan menjadi aplikasi yang lebih bermanfaat kedepannya.</p>
+            <p>
+              <strong>Komponen Aplikasi :</strong>
+              <ol style="margin-left: 2px;">
+                <li>Menggunakan Bahasa Pemrograman HTML, CSS dan Javascript (JQuery).</li>
+                <li>Tampilan Peta Menggunakan <a href="https://esri.github.io/esri-leaflet/">Esri Leaflet</a> dan <a href="https://leafletjs.com/">Leaflet</a></li>
+                <li>Tampilan Dashboard Menggunakan <a href="https://github.com/fulcrumapp">Fulcrumapp</a></li>
+              </ol>
+            </p>
+            <p>
+              <strong>Developer :</strong>
+              <p>Berminat mengembangkan aplikasi ini? Silahkan hubungi: <br>
+              <strong>Whatsapp : <a href="https://api.whatsapp.com/send?phone=628973771555">08973771555</a></strong>
+            </p>
+            <p>
+              <p>Copyright © 2020 <a href="https://www.instagram.com/panjidanutirto/">Panji Danutirto</a>. 
+              <br>All rights reserved.</p>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary pull-left" onclick="$('#aboutModal').modal('hide'); $('#introModal').modal('show');"><i class="fa fa-video-camera"></i>&nbsp;&nbsp;View the Introduction Video</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="crossorigin=""></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
+    integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
+    crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
+    integrity="sha512-MQlyPV+ol2lp4KodaU/Xmrn+txc1TP15pOBF/2Sfre7MRsA/pB4Vy58bEqe9u7a7DczMLtU5wT8n7OblJepKbg=="
+    crossorigin=""></script>
+    <script src="https://unpkg.com/esri-leaflet-cluster@2.0.1/dist/esri-leaflet-cluster.js"
+    integrity="sha512-2/Nwrks+A2omjKeWrF4TKFLIrUbAhSl8EDEm6xunuwXXYqMoJI71PZtlW0/vqt9d3DOyP1md/bzAnNH2KuAhaQ=="
+    crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script type="text/javascript" src="assets/js/L.Control.ZoomBar.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      var d = new Date();
+      $.ajax({url: "https://kawalcovid19.harippe.id/api/summary", success: function(result){
+           $("#kasus").html(result.confirmed.value);
+           $("#sembuh").html(result.recovered.value);
+           $("#perawatan").html(result.activeCare.value);
+           $("#meninggal").html(result.deaths.value);
+           $("#date").html(result.metadata.lastUpdatedAt);
+          }});
+      });
+    </script>
+  </body>
+</html>
