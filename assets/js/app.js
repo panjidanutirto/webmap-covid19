@@ -46,3 +46,36 @@ $("#about-btn").click(function() {
   $(".navbar-collapse.in").collapse("hide");
   return false;
 });
+
+function switchView(view) {
+  if (view == "split") {
+    $("#view").html("Split View");
+    location.hash = "#split";
+    $("#table-container").show();
+    $("#table-container").css("height", "55%");
+    $("#map-container").show();
+    $("#map-container").css("height", "45%");
+    $(window).resize();
+    if (map) {
+      map.invalidateSize();
+    }
+  } else if (view == "table") {
+    $("#view").html("Table View");
+    location.hash = "#table";
+    $("#table-container").show();
+    $("#table-container").css("height", "100%");
+    $("#map-container").hide();
+    $(window).resize();
+  }
+}
+
+$("[name='view']").click(function() {
+  $(".in,.open").removeClass("in open");
+  if (this.id === "map-graph") {
+    switchView("split");
+    return false;
+  } else if (this.id === "graph-only") {
+    switchView("table");
+    return false;
+  }
+});
