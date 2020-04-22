@@ -7,6 +7,22 @@ body {
   padding-top: 50px;
 }
 
+#map-container {
+  height: 45%;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+}
+
+#table-container {
+  height: 55%;
+  padding: 5px;
+  position: relative;
+  box-shadow: inset 0 8px 8px -8px #696868;
+}
+
 .my-custom-scrollbar {
 position: relative;
 height: 52vh;
@@ -15,23 +31,6 @@ overflow: auto;
 
 .table-wrapper-scroll-y {
 display: block;
-}
-
-#map-container {
-  height: 45%;
-  padding: 0;
-}
-#table-container {
-  height: 55%;
-  padding: 5px;
-  position: relative;
-  box-shadow: inset 0 8px 8px -8px #696868;
-}
-#map {
-  height: 100%;
-}
-#table tr {
-  cursor: pointer;
 }
 
 

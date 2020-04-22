@@ -2,6 +2,23 @@ $(document).ready(function() {
   $("#introModal").modal("show");
 });
 
+$("#about-btn").click(function() {
+  $("#aboutModal").modal("show");
+  $(".navbar-collapse.in").collapse("hide");
+  return false;
+});
+
+$(document).ready(function(){
+      var d = new Date();
+      $.ajax({url: "https://kawalcovid19.harippe.id/api/summary", success: function(result){
+           $("#kasus").html(result.confirmed.value);
+           $("#sembuh").html(result.recovered.value);
+           $("#perawatan").html(result.activeCare.value);
+           $("#meninggal").html(result.deaths.value);
+           $("#date").html(result.metadata.lastUpdatedAt);
+          }});
+      });
+
 function tampilkanCovid() {
           $.getJSON('https://api.kawalcorona.com/indonesia/provinsi/', function (data) {
              $.each(data, function (i, data) {
@@ -12,11 +29,11 @@ function tampilkanCovid() {
 tampilkanCovid();
 
 var map = new L.Map('map', {
-                zoomControl: false,
-                attribution: true,
-                continuousWorld: true
-            });
-            map.setView(new L.LatLng(-2.53, 117.33),3);
+    zoomControl: false,
+    attribution: true,
+    continuousWorld: true
+}); 
+map.setView(new L.LatLng(-2.53, 117.33),3);
 
 var esristreets = L.esri.basemapLayer('Streets').addTo(map);
 var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -40,42 +57,3 @@ map.addControl(new L.Control.Fullscreen({
       }));
 
 var zoom_bar = new L.Control.ZoomBar({position: 'topright'}).addTo(map);
-
-$("#about-btn").click(function() {
-  $("#aboutModal").modal("show");
-  $(".navbar-collapse.in").collapse("hide");
-  return false;
-});
-
-function switchView(view) {
-  if (view == "split") {
-    $("#view").html("Split View");
-    location.hash = "#split";
-    $("#table-container").show();
-    $("#table-container").css("height", "55%");
-    $("#map-container").show();
-    $("#map-container").css("height", "45%");
-    $(window).resize();
-    if (map) {
-      map.invalidateSize();
-    }
-  } else if (view == "table") {
-    $("#view").html("Table View");
-    location.hash = "#table";
-    $("#table-container").show();
-    $("#table-container").css("height", "100%");
-    $("#map-container").hide();
-    $(window).resize();
-  }
-}
-
-$("[name='view']").click(function() {
-  $(".in,.open").removeClass("in open");
-  if (this.id === "map-graph") {
-    switchView("split");
-    return false;
-  } else if (this.id === "graph-only") {
-    switchView("table");
-    return false;
-  }
-});

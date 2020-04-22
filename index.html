@@ -7,7 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="Covid-19 Dashboard">
     <meta name="author" content="Panji Danutirto">
 
     <title class="title">Covid-19 Dashboard</title>
@@ -28,7 +28,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Dashboard Covid-19</a>
+            <a class="navbar-brand" href="index.html">Dashboard Covid-19</a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -38,13 +38,6 @@
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
             <li><a id="about-btn" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-question-circle fa-white"></i> Tentang</a></li>
-            <li class="dropdown">
-              <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-laptop fa-white"></i> <span id="view">Split View </span><b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="map-graph"><i class="fa fa-th-large"></i> Split View</a></li>
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="graph-only"><i class="fa fa-table"></i> Table View</a></li>
-              </ul>
-            </li>
             </ul>
           </div><!--/.navbar-collapse -->
         </div>
@@ -145,7 +138,7 @@
               <ol style="margin-left: 2px;">
                 <li>Menggunakan Bahasa Pemrograman HTML, CSS dan Javascript (JQuery).</li>
                 <li>Tampilan Peta Menggunakan <a href="https://esri.github.io/esri-leaflet/">Esri Leaflet</a> dan <a href="https://leafletjs.com/">Leaflet</a></li>
-                <li>Tampilan Dashboard Menggunakan <a href="https://github.com/fulcrumapp">Fulcrumapp</a></li>
+                <li>Custom Dashboard Dari <a href="https://github.com/fulcrumapp">Fulcrumapp</a></li>
               </ol>
             </p>
             <p>
@@ -159,7 +152,6 @@
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary pull-left" onclick="$('#aboutModal').modal('hide'); $('#introModal').modal('show');"><i class="fa fa-video-camera"></i>&nbsp;&nbsp;View the Introduction Video</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
           </div>
         </div>
@@ -167,32 +159,16 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"
-    integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ=="
-    crossorigin=""></script>
+    integrity="sha512-cMQ5e58BDuu1pr9BQ/eGRn6HaR6Olh0ofcHFWe5XesdCITVuSBiBZZbhCijBe5ya238f/zMMRYIMIIg1jxv4sQ==" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
-    integrity="sha512-MQlyPV+ol2lp4KodaU/Xmrn+txc1TP15pOBF/2Sfre7MRsA/pB4Vy58bEqe9u7a7DczMLtU5wT8n7OblJepKbg=="
-    crossorigin=""></script>
+    integrity="sha512-MQlyPV+ol2lp4KodaU/Xmrn+txc1TP15pOBF/2Sfre7MRsA/pB4Vy58bEqe9u7a7DczMLtU5wT8n7OblJepKbg==" crossorigin=""></script>
     <script src="https://unpkg.com/esri-leaflet-cluster@2.0.1/dist/esri-leaflet-cluster.js"
-    integrity="sha512-2/Nwrks+A2omjKeWrF4TKFLIrUbAhSl8EDEm6xunuwXXYqMoJI71PZtlW0/vqt9d3DOyP1md/bzAnNH2KuAhaQ=="
-    crossorigin=""></script>
+    integrity="sha512-2/Nwrks+A2omjKeWrF4TKFLIrUbAhSl8EDEm6xunuwXXYqMoJI71PZtlW0/vqt9d3DOyP1md/bzAnNH2KuAhaQ==" crossorigin=""></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <script type="text/javascript" src="assets/js/L.Control.ZoomBar.js"></script>
     <script src="assets/js/app.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-      var d = new Date();
-      $.ajax({url: "https://kawalcovid19.harippe.id/api/summary", success: function(result){
-           $("#kasus").html(result.confirmed.value);
-           $("#sembuh").html(result.recovered.value);
-           $("#perawatan").html(result.activeCare.value);
-           $("#meninggal").html(result.deaths.value);
-           $("#date").html(result.metadata.lastUpdatedAt);
-          }});
-      });
-    </script>
   </body>
 </html>
