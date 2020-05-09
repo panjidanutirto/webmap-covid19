@@ -1,4 +1,4 @@
-# WEBGIS COVID-19
+# WebGIS Covid-19
 Aplikasi GIS berbasis web standar yang dapat dikembangkan menjadi aplikasi yang lebih bermanfaat kedepannya.
 
 # Komponen 
@@ -6,6 +6,5 @@ Aplikasi GIS berbasis web standar yang dapat dikembangkan menjadi aplikasi yang 
 2. Tampilan Peta Menggunakan [Esri Leaflet](https://esri.github.io/esri-leaflet/) dan [Leaflet](https://leafletjs.com/).
 3. Custom Dashboard Dari [Fulcrumapp](https://github.com/fulcrumapp).
 
-Copyright © 2020 [Panji Danutirto](https://www.instagram.com/panjidanutirto/).<br>
+Copyright © 2020 [Panji Danutirto](https://api.whatsapp.com/send?phone=628973771555).<br>
 All rights reserved.<br><br>
-__Whatsapp :__ [08973771555](https://api.whatsapp.com/send?phone=628973771555)
