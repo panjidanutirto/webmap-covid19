@@ -1,4 +1,4 @@
-# WEBGIS COVID-19
+# WEBMAP COVID-19
 Aplikasi GIS berbasis web standar yang dapat dikembangkan menjadi aplikasi yang lebih bermanfaat kedepannya.
 
 # Komponen 
